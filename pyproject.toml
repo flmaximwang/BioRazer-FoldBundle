@@ -1,0 +1,31 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "biorazer-fold-bundle"
+version = "0.1.0"
+description = "A package that wraps common biomolecular structure prediction workflows for server-side submission and analysis."
+authors = [
+	"Maxim Wang <wangfanlin2022@sibcb.ac.cn>"
+]
+readme = "README.md"
+packages = [
+	{ include = "biorazer_fold_bundle" }
+]
+
+[tool.poetry.dependencies]
+python = ">=3.11,<4.0"
+numpy = "^2"
+pandas = "^2.3.1"
+scipy = "^1.16.1"
+matplotlib = "^3.10.5"
+tqdm = "^4.67.1"
+biopython = "^1.85"
+biotite = "^1.4.0"
+scikit-learn = "^1.7.1"
+pyyaml = "^6.0.2"
+plotly = "^6.0.1"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.4.1"
