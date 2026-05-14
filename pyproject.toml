@@ -6,13 +6,9 @@ build-backend = "poetry.core.masonry.api"
 name = "biorazer-fold-bundle"
 version = "0.1.0"
 description = "A package that wraps common biomolecular structure prediction workflows for server-side submission and analysis."
-authors = [
-	"Maxim Wang <wangfanlin2022@sibcb.ac.cn>"
-]
+authors = ["Maxim Wang <wangfanlin2022@sibcb.ac.cn>"]
 readme = "README.md"
-packages = [
-	{ include = "biorazer_fold_bundle" }
-]
+packages = [{ include = "biorazer_fold_bundle" }]
 
 [tool.poetry.dependencies]
 python = ">=3.11,<4.0"

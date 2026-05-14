@@ -47,6 +47,13 @@ class Boltz2Sequence:
     ccd: str = None
     modifications: list[Boltz2Modification] = field(default_factory=list)
 
+    @classmethod
+    def from_seq(cls, sequence: str, entity_type: str, id: list[str]):
+        instance = cls(entity_type=entity_type, id=id or [], sequence=sequence)
+        if instance.entity_type == "protein":
+            instance.msa_from_seq()
+        return instance
+
     def check_integrity(self):
         if self.entity_type == "protein":
             if self.sequence is None:
@@ -100,6 +107,10 @@ class Boltz2Sequence:
         self.msa = f">query\n{self.sequence}\n"
 
     def read_msa(self):
+        """
+        Reads the MSA from a file and stores it in the `msa` attribute.
+        """
+
         msa_type = self.check_msa_type()
         if msa_type != "file":
             raise ValueError("MSA must be provided as a file for protein entity type.")
@@ -400,7 +411,8 @@ class Boltz2JobBatch(JobBatch):
         Parameters
         ----------
         input_file: str or Path
-            The path to the input YAML/fasta file containing the job request.
+            The path to the input YAML/fasta file containing the job request.<INPUT_PATH> can be either a single .yaml or .fasta file
+            (YAML is preferred; FASTA is deprecated), or a directory, in which case predictions will be run on all .yaml and .fasta files inside.
         output_dir: str or Path, optional
             The directory where the output files will be saved. Default is the current directory.
         cache_dir: str or Path, optional
